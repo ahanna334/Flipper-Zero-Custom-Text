@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<meta name="viewport" content="width=device-width, initial-scale=0.75, user-scalable=no">
+<script src="flipper.js"></script>
+<link rel="stylesheet" href="style.css">
+
+<title>Flipper Zero</title>
+<link rel='icon' type='image/png' href='https://i.imgur.com/z4CK94y.png'>
+<head>
+  <link rel="preload" href="./AltMono-Regular.otf" type="font/otf" as="font" crossOrigin="anonymous"/>
+</head>
+<html>
+
+<p id="htp">Hack The Planet 🌎🐬<br>
+<input type="text" id="input" maxlength="21"/> 
+<input type="button" id="clear" value="Clear" style="background-color: #F5761A; color: black; font-weight: bold"onclick="clearCanvas();"></button><br>
+<img id="flipper" width="500" height="577" crossorigin="anonymous" src="https://i.imgur.com/Dd2Cnpa.png" alt="The flipper" hidden="">
+<canvas id="cvs" width="480" height="400" style="outline: none;">
+        Your browser does not support the HTML5 canvas tag.
+    </canvas>
+    <br>
+</p>
+<br>
+<div id="createPNGButton">
+    <button style="background-color: #F5761A; color: black; font-weight: bold" onclick="saveImage()">Save as Image</button>
+</div>
+
+
+<body>
+
+    <style>
+        @font-face {
+            font-family: 'myFont';
+            src: url('AltMono-Regular.otf');
+        }
+
+        body {
+            width: 100%;
+            min-height: 600px;
+            height: 100vh;
+            background-position: 0 0;
+            background-size: 100% 100%;
+            background: linear-gradient( rgb(255, 94, 14) 0%, rgb(255, 94, 14) 10%, rgb(253, 103, 58) 10%, rgb(253, 103, 58) 30%, rgb(230, 129, 47) 30%, rgb(230, 129, 47) 50%, rgb(1236, 118, 37) 50%, rgb(253, 103, 58) 70% );
+        }
+        p, button {
+            font-weight: bold;
+            color: black;
+            font-family: myFont;
+            font-size: 18px;
+        }
+        button {
+                margin-bottom: 5px;
+        }
+        p, button {
+            margin-left: 5px;
+        }
+
+        #createPNGButton, #htp{
+            width: 100%;
+            text-align: center;
+        }
+        #clear {
+            font-weight: bold;
+            color: black;
+            font-family: myFont;
+            font-size: 14px;
+        }
+        #cvs {
+            margin-top: 5px;
+            margin-right: 60px;
+        }
+        
+    </style>
+<script>
+       function clearCanvas(){
+            document.getElementById('input').value = '';
+            var canvas = document.getElementById('cvs');
+            var ctx = canvas.getContext('2d');
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            var img = document.getElementById("flipper");
+            ctx.drawImage(img, 0, -50);
+        }
+          function saveImage() {
+            var canvas = document.getElementById("cvs");
+            image = canvas.toDataURL("image/png", 1.0).replace("image/png", "image/octet-stream");
+            var link = document.createElement('a');
+            link.download = "my-image.png";
+            link.href = image;
+            link.click();
+        }
+
+</script>
